@@ -34,6 +34,7 @@ class ProtectRoutes
                 'client-admin.invitation-form',
                 'client-admin.send-invitation',
                 'client-admin.download',
+                'url.shortner.form',
                 'short_url'
             ],
             'client_members' => [

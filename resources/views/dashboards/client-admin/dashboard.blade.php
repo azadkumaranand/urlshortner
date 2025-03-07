@@ -43,11 +43,11 @@
                             <td>{{ date('d M y', strtotime($createdShortUrl->created_at)) }}</td>
                         </tr>
                     @endforeach
-                    @if (empty($createdShortUrls))
-                        No Data found
-                    @endif
                 </tbody>
             </table>
+            @if (count($createdShortUrls)==0)
+                <p class="fs-6 font-bold text-center">No Data found</p>
+            @endif
             {{ $createdShortUrls->links() }} 
         </div>
 
@@ -86,11 +86,11 @@
                             <td>{{ $user->short_url_count_by_member_sum_count??0 }}</td>
                         </tr>
                     @endforeach
-                    @if (empty($users))
-                        No Data found
-                    @endif
                 </tbody>
             </table>
+            @if (count($users)==0)
+                <p class="fs-6 font-bold text-center">No Data found</p>
+            @endif
             {{ $users->links() }} 
         </div>
     </div>

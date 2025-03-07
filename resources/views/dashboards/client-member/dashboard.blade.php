@@ -61,11 +61,11 @@
                             <td>{{ date('d M y', strtotime($createdShortUrl->created_at)) }}</td>
                         </tr>
                     @endforeach
-                    @if (empty($createdShortUrls))
-                        No Data found
-                    @endif
                 </tbody>
             </table>
+            @if (count($createdShortUrls)==0)
+                <p class="fs-6 font-bold text-center">No Data found</p>
+            @endif
             {{ $createdShortUrls->links() }} 
         </div>
     </div>
