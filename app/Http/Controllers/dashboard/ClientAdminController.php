@@ -13,20 +13,33 @@ use App\Exports\GenratedShortUrlExport;
 
 class ClientAdminController extends Controller
 {
-    function index (){
+    function index (Request $request){
         $users = User::withCount([
                             'usersUnderClient',
                             'ShortUrlGeneretedByMember',
                         ])->withSum('shortUrlCountByMember', 'count')
                         ->where('client_id', auth()->user()->id)
-                        ->paginate(1);
-        $createdShortUrls = ShortUrl::where('client_id', auth()->user()->id)->paginate(1);
+                        ->paginate(1, ['*'], 'user_page');
+        
+        $urlQuery = $createdShortUrls = ShortUrl::where('client_id', auth()->user()->id)->orderBy('created_at', 'desc');
+        if($request->query('q') && !is_null($request->query('q'))){
+            if($request->query('q') == 'tm'){
+                $urlQuery->whereMonth('created_at', now()->month)->whereYear('created_at', now()->year);
+            }elseif($request->query('q') == 'lm'){
+                $urlQuery->whereMonth('created_at', now()->subMonth()->month)->whereYear('created_at', now()->subMonth()->year);
+            }elseif($request->query('q') == 'lw'){
+                $urlQuery->whereBetween('created_at', [now()->subWeek()->startOfWeek(), now()->subWeek()->endOfWeek()]);
+            }elseif($request->query('q') == 'today'){
+                $urlQuery->whereDate('created_at', now()->today());
+            }
+        }
+        $createdShortUrls = $urlQuery->paginate(3, ['*'], 'url_page');
         // return $users;
         return view('dashboards.client-admin.dashboard', ['users'=>$users, 'createdShortUrls'=>$createdShortUrls]);
     }
 
     public function downloadReport(){
-        $shortUrl = ShortUrl::all()->map(function($url){
+        $shortUrl = ShortUrl::where('client_id', auth()->user()->id)->get()->map(function($url){
             return [
                 'id' => $url->id,
                 "long_url"=>$url->original_url,
@@ -36,7 +49,15 @@ class ClientAdminController extends Controller
                 'created_at'=>date('d M y', strtotime($url->created_at))
             ];
         });
-        return \Excel::download(new GenratedShortUrlExport($shortUrl), 'short-url-report.xlsx');
+        $heading = [
+            'id',
+            'Long Url',
+            'Short Url',
+            'Hits',
+            'Name',
+            'Created On'
+        ];
+        return \Excel::download(new GenratedShortUrlExport($shortUrl, $heading), 'short-url-report.xlsx');
     }
 
     public function invitationForm(){

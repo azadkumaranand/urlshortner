@@ -16,8 +16,10 @@ class GenratedShortUrlExportSheet implements FromCollection, WithTitle, WithHead
     * @return \Illuminate\Support\Collection
     */
     public $reportData;
-    public function __construct($reportData){
+    public $heading;
+    public function __construct($reportData, $heading){
         $this->reportData = $reportData;
+        $this->heading = $heading;
         
     }
     public function collection()
@@ -26,14 +28,7 @@ class GenratedShortUrlExportSheet implements FromCollection, WithTitle, WithHead
     }
     public function headings(): array
     {
-        return [
-            'id',
-            'Long Url',
-            'Short Url',
-            'Hits',
-            'Name',
-            'Created On'
-        ];
+        return $this->heading;
     }
     public function title(): string
     {

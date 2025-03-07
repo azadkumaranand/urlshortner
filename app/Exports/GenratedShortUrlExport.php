@@ -13,13 +13,15 @@ class GenratedShortUrlExport implements WithMultipleSheets
     * @return \Illuminate\Support\Collection
     */
     public $reportData;
-    public function __construct($reportData){
+    public $heading;
+    public function __construct($reportData, $heading){
         $this->reportData = $reportData;
+        $this->heading = $heading;
     }
     public function sheets(): array
     {
         $sheets = [];
-        $sheets[] = new GenratedShortUrlExportSheet($this->reportData);
+        $sheets[] = new GenratedShortUrlExportSheet($this->reportData, $this->heading);
         return $sheets;
     }
 }

@@ -43,9 +43,12 @@
                             <td>{{ date('d M y', strtotime($createdShortUrl->created_at)) }}</td>
                         </tr>
                     @endforeach
+                    @if (empty($createdShortUrls))
+                        No Data found
+                    @endif
                 </tbody>
             </table>
-            {{ $users->links() }} 
+            {{ $createdShortUrls->links() }} 
         </div>
 
         {{-- Total team members --}}
@@ -83,6 +86,9 @@
                             <td>{{ $user->short_url_count_by_member_sum_count??0 }}</td>
                         </tr>
                     @endforeach
+                    @if (empty($users))
+                        No Data found
+                    @endif
                 </tbody>
             </table>
             {{ $users->links() }} 

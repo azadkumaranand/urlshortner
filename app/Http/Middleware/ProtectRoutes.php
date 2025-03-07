@@ -27,7 +27,7 @@ class ProtectRoutes
                 'super-admin.dashboard',
                 'super-admin.invitation-form',
                 'super-admin.send-invitation',
-                'client-admin.download'
+                'super-admin.download'
             ],
             'client_admin' => [
                 'client-admin.dashboard',
@@ -40,7 +40,7 @@ class ProtectRoutes
                 'client-member.dashboard',
                 'url.shortner.form',
                 'short_url',
-                'client-admin.download'
+                'client-member.download'
             ],
         ];
 

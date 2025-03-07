@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Log;
 
 class InvitationEmail extends Notification
 {
@@ -38,7 +39,12 @@ class InvitationEmail extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        return (new MailMessage)->view('emails.invitation', ['user' => $this->user, 'password' => base64_encode($this->password)]);
+        Log::info('sending email');
+        try {
+            return (new MailMessage)->view('emails.invitation', ['user' => $this->user, 'password' => base64_encode($this->password)]);
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+        }
     }
 
     /**
@@ -46,10 +52,10 @@ class InvitationEmail extends Notification
      *
      * @return array<string, mixed>
      */
-    // public function toArray(object $notifiable): array
-    // {
-    //     return [
-    //         //
-    //     ];
-    // }
+    public function toArray(object $notifiable): array
+    {
+        return [
+            //
+        ];
+    }
 }
