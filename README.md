@@ -16,8 +16,9 @@ Ensure your system has the following installed:
 Follow these steps to set up:
 
 # 1. Clone the repository
-git clone https://github.com/your-username/your-laravel-project.git
-cd your-laravel-project
+git clone -b master https://github.com/azadkumaranand/urlshortner.git
+
+cd urlshortner
 
 # 2. Install PHP dependencies
 composer install
