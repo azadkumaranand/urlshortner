@@ -9,7 +9,7 @@ Ensure your system has the following installed:
 - **Composer** (latest version)  
 - **Node.js** (LTS version recommended)  
 - **NPM**  
-- **Database** (MySQL or sqalite)  
+- **Database** (MySQL or sqlite)  
 
 ## Installation  
 
