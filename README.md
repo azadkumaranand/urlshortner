@@ -58,8 +58,8 @@ php artisan migrate
 php artisan db:seed
 
 # login credentials after seeding for super admin
-email: azadkumar@gmail.com
-pass: 123456789
+- email: azadkumar@gmail.com
+- pass: 123456789
 
 # 7. Install frontend dependencies
 npm install
