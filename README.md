@@ -31,24 +31,24 @@ php artisan key:generate
 
 # 5. Configure database (update .env file)
 # Open .env and set your database credentials:
-DB_CONNECTION=mysql
-DB_PORT=3306
-DB_DATABASE=your_database_name
-DB_USERNAME=your_username
-DB_PASSWORD=your_password
+- DB_CONNECTION=mysql
+- DB_PORT=3306
+- DB_DATABASE=your_database_name
+- DB_USERNAME=your_username
+- DB_PASSWORD=your_password
 
 # Configure SMTP (Mail)
 
 # Open the .env file and set up your SMTP mail configuration:
 # it is important for sending invitation so make sure your credentials should correct 
 
-MAIL_MAILER=smtp
-MAIL_HOST=smtp.yourmailserver.com
-MAIL_PORT=587
-MAIL_USERNAME=your-email@example.com
-MAIL_PASSWORD=your-email-password
-MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS=your-email@example.com
+- MAIL_MAILER=smtp
+- MAIL_HOST=smtp.yourmailserver.com
+- MAIL_PORT=587
+- MAIL_USERNAME=your-email@example.com
+- MAIL_PASSWORD=your-email-password
+- MAIL_ENCRYPTION=tls
+- MAIL_FROM_ADDRESS=your-email@example.com
 
 # 6. Run database migrations
 php artisan migrate
